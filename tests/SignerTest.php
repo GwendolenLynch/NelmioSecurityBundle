@@ -25,6 +25,13 @@ class SignerTest extends TestCase
         new Signer('secret', 'invalid_hash_algo');
     }
 
+    public function testNullValueReturnsEmptyString(): void
+    {
+        $signer = new Signer('secret', 'sha1');
+
+        static::assertSame('', $signer->getSignedValue(null));
+    }
+
     public function testShouldVerifyValidSignature(): void
     {
         $signer = new Signer('secret', 'sha1');

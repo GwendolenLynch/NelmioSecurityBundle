@@ -28,8 +28,12 @@ final class Signer
         }
     }
 
-    public function getSignedValue(string $value, ?string $signature = null): string
+    public function getSignedValue(?string $value, ?string $signature = null): string
     {
+        if (null === $value) {
+            return '';
+        }
+
         if (null === $signature) {
             $signature = $this->generateSignature($value);
         }
